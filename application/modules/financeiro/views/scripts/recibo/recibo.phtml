@@ -1,0 +1,46 @@
+<div class="recibo-container" style="font-family: Helvetica; <?php echo $this->partialCounter % 4 ? '' : 'page-break-before: always;'; ?>">
+    <p class="recibo-endereco">
+	Avenida das Ind&uacute;strias, n&ordm; 601, Sala 203 - Goi&acirc;nia<br />
+	Av. Miguel Sutil n&ordm; 8000, Sala 1805 - Cuiab&aacute;
+    </p>
+    <h3><?php echo $this->translate()->_( 'RECIBO DE CAIXA' ); ?></h3>
+    
+    <table class="table-recibo">
+	<tr>
+	    <td colspan="4">
+		<?php echo $this->translate()->_( 'Saida de numerário' ); ?> ( <?php if ( 'S' == $this->fn_recibo_tipo ) echo 'x'; ?> ) 
+		&nbsp;&nbsp;&nbsp; 
+		<?php echo $this->translate()->_( 'Entrada de numerário' ); ?> ( <?php if ( 'E' == $this->fn_recibo_tipo ) echo 'x'; ?> )
+	    </td>
+	</tr>
+	<tr>
+	    <td class="label">ID:</td>
+	    <td class="text" colspan="3"><?php echo str_pad( $this->fn_recibo_id, 11, '0', STR_PAD_LEFT ); ?></td>
+	</tr>
+	<tr>
+	    <td class="label"><?php echo $this->translate()->_( 'Para/De' ); ?>:</td>
+	    <td class="text" colspan="3"><?php echo strtoupper( $this->nome ); ?></td>
+	</tr>
+	<tr>
+	    <td class="label"><?php echo $this->translate()->_( 'Valor' ); ?> R$:</td>
+	    <td class="text" colspan="3">
+		<?php echo $this->currency( $this->fn_recibo_valor ); ?>
+		( <?php echo strtoupper( App_General_Extenso::moeda( preg_replace( '/[^0-9]/', '', $this->currency( $this->fn_recibo_valor ) ) ) ); ?> )
+	    </td>
+	</tr>
+	<tr>
+	    <td class="label"><?php echo $this->translate()->_( 'Referente' ); ?>:</td>
+	    <td class="text" colspan="3"><?php echo strtoupper( $this->fn_recibo_descricao ); ?></td>
+	</tr>
+	<tr>
+	    <td class="label"><?php echo $this->translate()->_( 'CPF/CNPJ' ); ?>:</td>
+	    <td class="text" colspan="3"><?php echo $this->cpf_cnpj; ?></td>
+	</tr>
+	<tr>
+	    <td class="label"><?php echo $this->translate()->_( 'Data' ); ?>:</td>
+	    <td class="text data"><?php echo $this->date( $this->fn_recibo_data ); ?></td>
+	    <td class="label"><?php echo $this->translate()->_( 'Assinatura' ); ?>:</td>
+	    <td class="text">&nbsp;</td>
+	</tr>
+    </table>
+</div>

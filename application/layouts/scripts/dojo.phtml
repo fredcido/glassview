@@ -1,0 +1,35 @@
+<?php
+        $this->dojo()->enable();
+        
+        $auth = Zend_Auth::getInstance();
+        
+        if ( $auth->hasIdentity() && !empty($auth->getIdentity()->linguagem_local) ) {
+            
+            $locale = $auth->getIdentity()->linguagem_local;
+                        
+        } else {
+            
+            $config = Zend_Registry::get( 'config' );
+            
+            $locale = $config->language->locale;
+            
+        }
+
+        if ( $this->dojo()->isEnabled() ) {
+
+            $this->dojo()
+                    ->setLocalPath( $this->baseUrl( Zend_Registry::get('config')->dojo->path ) )
+                    ->addStyleSheetModule( 'dijit.themes.' . Zend_Registry::get('config')->dojo->theme )
+                    ->registerModulePath( 'modulo', '../../dojo-release-1.5.1-src/modulo' )
+                    ->addLayer( $this->baseUrl( 'public/scripts/dojo/dojo/dojoBuildSystem.js' ) )
+                    ->setDjConfig(
+			array(
+			    'parseOnLoad' => true,
+			    'isDebug'     => false,
+			    'locale'      => str_replace( array( '_', '.' ), '-', $locale ),
+			    'extraLocale' => array( 'pt-br' )
+			)
+		    );
+            
+            echo $this->dojo()."\n";
+        }

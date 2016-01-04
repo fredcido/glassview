@@ -1,0 +1,129 @@
+<?php echo $this->doctype()."\n"; ?>
+<html>
+    <head>
+        <?php
+            
+	    echo $this->headTitle( Zend_Registry::get('config')->geral->title );
+
+	    $this->headMeta()->appendHttpEquiv('Content-Language', 'pt-BR')
+			     ->appendHttpEquiv('expires', 'Wed, 26 Feb 2012 08:21:57 GMT')
+			     ->appendHttpEquiv('pragma', 'no-cache')
+			     ->appendHttpEquiv('Cache-Control', 'no-cache')
+			     ->appendHttpEquiv('imagetoolbar', 'no')
+			     ->appendHttpEquiv('Content-Encoding', 'gzip');
+
+	    echo $this->headMeta()."\n";
+
+	    $this->headLink()->headLink(array('href' => $this->baseUrl('/public/images/favicon.ico'),'rel' => 'SHORTCUT ICON' ));
+
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/styles/appstyle.css') );
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/styles/icons.css') );
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/styles/icones.css') );
+	    $this->headLink()->appendStylesheet( $this->baseUrl( 'public/styles/lembrete.css' ) );
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxgrid.css') );
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxtreegrid.css') );
+	    $this->headLink()->appendStylesheet( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/skins/dhtmlxgrid_dhx_skyblue.css') );
+        
+            $this->headLink()->appendStylesheet( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/scheduler/dhtmlxscheduler_glossy.css') );
+
+	    echo $this->headLink()."\n";
+
+	    echo $this->render('translate.phtml');
+	    echo $this->render('dojo.phtml');
+
+
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/js/customwidget.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/js/jquery.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_start.js') ); 
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_drag.js') ); 
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_pgn.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_form.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_srnd.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_filter.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/ext/dhtmlxgrid_undo.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxgridcell.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxcommon.js') );
+	    $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxgrid.js') );
+	    
+        
+            $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/scheduler/ext/dhtmlxscheduler_timeline.js') );
+            $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/scheduler/ext/dhtmlxscheduler_tooltip.js') );
+            $this->headScript()->prependFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/scheduler/dhtmlxscheduler.js') );
+	    $this->headScript()->appendFile( $this->baseUrl('public/scripts/dhtmlx/dhtmlxGrid/codebase/dhtmlxtreegrid.js') );
+            $this->headScript()->prependFile( $this->baseUrl('public/scripts/js/appscript.js') );
+        
+        
+	    echo $this->headScript()."\n"; 
+
+        ?>
+        <script type="text/javascript">
+            var baseUrl = '<?php echo $this->baseUrl(); ?>';
+            window.dhx_globalImgPath = baseUrl + "/public/scripts/dhtmlx/dhtmlxGrid/codebase/imgs/";
+	    <?php
+		$auth = Zend_Auth::getInstance()->hasIdentity() ? (array)Zend_Auth::getInstance()->getIdentity() : array();
+	    ?>
+	    var objAuth  = <?php echo json_encode( $auth ); ?>;
+	    var objAppid = '<?php echo Zend_Registry::get('config')->geral->appid; ?>';
+        </script>
+ 
+        
+    </head>
+    <body class="<?php echo Zend_Registry::get('config')->dojo->theme; ?>">
+
+        <div id="carregando_sistema"><label><?php echo $this->translate()->_('Carregando sistema...') ?></label></div>
+                            
+        <div id="loading" class="white_content"></div>
+        <div id="loading_bkg" class="black_overlay"></div>
+            
+        <div id="msgDiv" class="messenger" style="display: none;" onclick="objGeral.animateMsg( false );">
+            <img src="<?php echo $this->baseUrl('/public/images/exit.png'); ?>" width="17" height="17" alt="Fechar" title="Fechar" onclick="objGeral.animateMsg( false );" />
+            <h3 id="msgDivText"></h3>
+        </div>
+        <div id="back_msg" style="display:none;" ondblclick="objGeral.animateMsg( false );"></div>
+        
+    	<div id="info_home">
+            <h1><a href="#"><?php echo Zend_Registry::get('config')->geral->title; ?></a></h1>
+            <p id="userbox">
+                <?php echo $this->translate()->_('Usuário') ?>: <strong><?php echo Zend_Auth::getInstance()->getIdentity()->usuario_nome; ?></strong>
+                &nbsp;|&nbsp;<a href="<?php echo $this->baseUrl('auth/logout'); ?>"><?php echo $this->translate()->_('Sair') ?></a> <br>
+                <small><?php echo $this->translate()->_('Data') ?>: <?php echo Zend_Date::now()->toString('dd/MM/yyyy'); ?></small><br>
+                <small>IP: <?php echo $_SERVER['REMOTE_ADDR']; ?></small>
+            </p>
+    	</div>
+     
+        <?php 
+	
+            echo $this->menu().PHP_EOL.PHP_EOL;
+	    
+            $this->borderContainer()->captureStart( 'borderContainer', array( 'liveSplitters' => 'true' ) );
+
+            $this->contentPane()->captureStart( 'tab-home', 
+                                                array( 'iconClass' => 'customIcon icon-home' ), 
+                                                array( 'title' => $this->translate()->_('Página inicial') ) );
+
+            echo $this->layout()->content.PHP_EOL;
+
+			$tab_home = $this->contentPane()->captureEnd('tab-home');
+
+			$contentCenter =  $this->tabContainer( 
+                                                            'contentCenter', 
+                                                            $tab_home,
+                                                            array(
+                                                                    'doLayout' => 'false',
+                                                                    'nested' => 'true'
+                                                                ) 
+                                                        );
+
+            echo $this->contentPane( 'contentPane_1', $contentCenter, array( 'region' => 'center' ) ).PHP_EOL;
+	          
+	       $this->contentPane()->captureStart( 'content-rodape', array(), array( 'region' => 'bottom' ) );
+	    ?>
+            <div id="rodape">
+                &copy; Copyright 
+	        </div>
+	    <?php
+	       echo  $this->contentPane()->captureEnd( 'content-rodape' ).PHP_EOL;
+	       echo $this->borderContainer()->captureEnd( 'borderContainer' ).PHP_EOL;
+        ?> 
+    </body>
+</html>

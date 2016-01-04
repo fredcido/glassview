@@ -1,0 +1,25 @@
+<?php
+    $situacao = 'Quitado';
+    if($this->data->parcelas_pagas != $this->data->fn_duplicata_parcelas){
+
+        $situacao = 'Pago '.$this->data->parcelas_pagas.' de '.$this->data->fn_duplicata_parcelas;
+    }
+    
+    if(empty($this->data->data_quitacao)){
+        
+        $dtefetivado = '-';
+    }else{
+        
+        $dtefetivado = $this->date( $this->data->data_quitacao );
+    }
+?>
+<tr>
+    <td><?php echo $this->date( $this->data->fn_lancamento_data ); ?></td>
+    <td><?php echo $this->data->terceiro_nome; ?></td>
+    <td><?php echo $this->data->fn_doc_fiscal_numero; ?></td>
+    <td><?php echo $this->currency( $this->data->fn_duplicata_total ); ?></td>
+    <td><?php echo $this->data->fn_duplicata_parcelas; ?></td>
+    <td><?php echo $situacao; ?></td>
+    <td><?php echo $dtefetivado; ?></td>
+    <td><?php echo $this->nomenclatura()->tipoDuplicata( $this->data ); ?></td>
+</tr>

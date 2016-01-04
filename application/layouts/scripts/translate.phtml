@@ -1,0 +1,33 @@
+<?php
+        $auth = Zend_Auth::getInstance();
+        
+        if ( $auth->hasIdentity() && !empty($auth->getIdentity()->linguagem_local) ) {
+            
+            $locale = $auth->getIdentity()->linguagem_local;
+            
+            $id = 'Zend_Translate_' . $locale;
+            
+        } else {
+
+            
+            $config = Zend_Registry::get( 'config' );
+            
+            $locale = $config->language->locale;
+            $id = 'Zend_Translate_' . $config->language->locale;
+        }
+        
+        $frontendOptions = array(
+            'lifetime'                  => 86400, // 24hrs
+            'automatic_serialization'   => true
+        );
+
+        $backendOptions = array('cache_dir' => APPLICATION_PATH . '/cache');
+
+        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+        
+        $data = $cache->load($id);
+        
+?>
+<script type="text/javascript">
+    var objTranslate = <?php echo json_encode( $data ); ?>;
+</script>

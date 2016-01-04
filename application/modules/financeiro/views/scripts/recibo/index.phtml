@@ -1,0 +1,18 @@
+<div class="mainTela">
+    <div dojoType="dijit.layout.BorderContainer" class="borderToolbar">
+         <?php 
+		echo $this->toolbar()
+			  ->addCustomButton(
+			    array(
+				'action' => App_Plugins_Acl::getIdentifier( '/financeiro/recibo/', 'Imprimir' ),
+				'id'     => 'button-imprimir-recibo',
+				'label'  => 'Imprimir',
+				'icon'   => 'icon-toolbar-printer',
+				'click'  => 'financeiroRecibo.imprimir();'
+			    )
+			  );  
+	?>
+    </div>
+    <div id="gridFinanceiroRecibo" class="gridTela"></div>
+    <div id="divpagFinanceiroReciboGrid" class="pagingBlock"></div>
+</div>

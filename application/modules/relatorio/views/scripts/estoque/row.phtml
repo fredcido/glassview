@@ -1,0 +1,10 @@
+<tr>
+    <td><?php echo $this->date( $this->data->estoque_data ); ?></td>   
+    <td><?php echo $this->data->produto_descricao; ?></td>
+    <td><?php echo $this->nomenclatura()->tipoMovimentacaoEstoque( $this->data ); ?></td>
+    <td><?php echo $this->data->estoque_quantidade; ?></td>
+    <td><?php echo $this->currency( $this->data->estoque_valor_atual ); ?></td>
+    <td><?php echo $this->currency( $this->data->estoque_valor_atual*$this->data->estoque_quantidade ); ?></td>
+    <td><?php echo $this->data->estoque_qtde_anterior; ?></td>
+    <td><?php echo $this->data->estoque_qtde_atual; ?></td>
+</tr>

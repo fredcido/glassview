@@ -1,0 +1,18 @@
+<table id="relatorio">
+    <tbody>
+		<?php echo $this->partialLoop( 'balancete/row.phtml', $this->data['lanc'] ); ?>
+    </tbody>
+    
+    <tfoot>
+    	<tr>
+		    <td colspan="5">
+				<?php echo $this->translate()->_( 'Total' ); ?>
+		    </td>
+		    <td colspan="2">
+		    	<strong>
+		    		<?php echo $this->currency( $this->data['total'] ); ?>
+		    	</strong>
+		    </td>
+    	</tr>
+    </tfoot>
+</table>

@@ -1,0 +1,31 @@
+<table id="relatorio">
+    <thead>
+        <tr>
+            <th><?php echo $this->translate()->_('Data'); ?></th>
+            <th><?php echo $this->translate()->_('Terceiro'); ?></th>
+            <th><?php echo $this->translate()->_('Doc. Fiscal'); ?></th>
+            <th><?php echo $this->translate()->_('Valor'); ?></th>
+            <th><?php echo $this->translate()->_('Parcelas'); ?></th>
+            <th><?php echo $this->translate()->_('Situação'); ?></th>
+            <th><?php echo $this->translate()->_('Efetivação'); ?></th>
+            <th><?php echo $this->translate()->_('Tipo'); ?></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php echo $this->partialLoop('duplicata/row.phtml', $this->data['data']); ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <?php echo $this->translate()->_('Total'); ?>
+            </td>
+            <td colspan="2">
+                <strong>
+                    <?php echo $this->currency($this->data['total']); ?>
+                </strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>

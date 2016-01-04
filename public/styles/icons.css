@@ -1,0 +1,20 @@
+.customIcon {
+    background-position: 0px;
+    background-repeat: no-repeat !important;
+    width: 16px;
+    height: 16px;
+}
+
+.icon-home                 { background: url(../images/icons/home.png); }
+.icon-master-modulo        { background: url(../images/icons/master-modulo.png); }
+.icon-master-tela          { background: url(../images/icons/master-tela.png); }
+.icon-master-acao          { background: url(../images/icons/master-acao.png); }
+.icon-master-menu          { background: url(../images/icons/master-menu.png); }
+.icon-master-auditoria     { background: url(../images/icons/master-auditoria.png); }
+.icon-master-configuracao  { background: url(../images/icons/master-configuracao.png); }
+
+.icon-admin-filial         { background: url(../images/icons/admin-filial.png); }
+.icon-admin-perfil         { background: url(../images/icons/admin-perfil.png); }
+.icon-admin-usuario        { background: url(../images/icons/admin-usuario.png); }
+.icon-admin-cargo          { background: url(../images/icons/admin-cargo.png); }
+.icon-admin-terceiro       { background: url(../images/icons/admin-terceiro.png); }

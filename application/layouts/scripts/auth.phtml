@@ -1,0 +1,49 @@
+<?php echo $this->doctype()."\n"; ?>
+<html>
+<head>
+        <script type="text/javascript">
+            var baseUrl = '<?php echo $this->baseUrl(); ?>';
+        </script>
+	<?php 
+        
+                $this->headMeta()->appendHttpEquiv('Content-Language', 'pt-BR')
+                            ->appendHttpEquiv('expires', 'Wed, 26 Feb 2012 08:21:57 GMT')
+                            ->appendHttpEquiv('pragma', 'no-cache')
+                            ->appendHttpEquiv('Cache-Control', 'no-cache')
+                            ->appendHttpEquiv('imagetoolbar', 'no')
+                            ->appendHttpEquiv('Content-Encoding', 'gzip');
+                
+                echo $this->render('translate.phtml');
+                echo $this->render('dojo.phtml');
+                
+                $this->headLink()->headLink(array('href' => $this->baseUrl('/public/images/favicon.ico'),'rel' => 'SHORTCUT ICON' ));
+		$this->headLink()->appendStylesheet( $this->baseUrl('public/styles/style.css') );
+		$this->headLink()->appendStylesheet( $this->baseUrl('public/styles/appstyle.css') );
+		$this->headScript()->prependFile( $this->baseUrl('public/scripts/js/html5.js') );
+		
+		echo $this->headMeta()."\n";
+		echo $this->headLink()."\n";
+		echo $this->headScript()."\n";
+		echo $this->headTitle( Zend_Registry::get('config')->geral->title );
+	?>
+</head>
+    <body class="main">
+	    <div id="carregando_sistema">
+		<label>
+		    <?php echo $this->translate()->_('Carregando sistema...') ?>
+		</label>
+	    </div>
+
+	    <div id="loading" class="white_content"></div>
+	    <div id="loading_bkg" class="black_overlay"></div>
+
+	    <div id="msgDiv" class="messenger" style="display: none;" onclick="objGeral.animateMsg( false );">
+		<img src="<?php echo $this->baseUrl('/public/images/exit.png'); ?>" width="17" height="17" alt="Fechar" title="Fechar" onclick="objGeral.animateMsg( false );" />
+		<h3 id="msgDivText"></h3>
+	    </div>
+	    <div id="back_msg" style="display:none;" ondblclick="objGeral.animateMsg( false );"></div>
+
+	    <?php echo $this->layout()->content; ?>
+
+    </body>
+</html>

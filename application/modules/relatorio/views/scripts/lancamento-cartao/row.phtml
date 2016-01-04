@@ -1,0 +1,9 @@
+<tr>
+    <td><?php echo $this->date($this->data->fn_lanc_cartao_data); ?></td>
+    <td><?php echo $this->data->fn_cc_descricao; ?></td>
+    <td><?php echo $this->data->fn_cc_bandeira; ?></td>
+    <td><?php echo $this->data->fn_cc_numero; ?></td>
+    <td><?php echo $this->data->fn_lanc_cartao_desc; ?></td>
+    <td><?php echo $this->translate()->_( $this->data->fn_lanc_cartao_status == 'F' ? 'Sim' : 'Não' ); ?></td>
+    <td><?php echo $this->currency($this->data->fn_lanc_cartao_valor); ?></td>
+</tr>

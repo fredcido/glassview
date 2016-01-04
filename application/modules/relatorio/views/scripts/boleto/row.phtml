@@ -1,0 +1,9 @@
+<tr>
+    <td><?php echo $this->date( $this->data->fn_lancamento_data ); ?></td>
+    <td><?php echo $this->data->terceiro_nome; ?></td>
+    <td><?php echo $this->data->fn_parcela_ref.'/'.$this->data->fn_duplicata_parcelas; ?></td>
+    <td><?php echo $this->data->fn_doc_fiscal_numero; ?></td>
+    <td><?php echo $this->nomenclatura()->tipoDuplicata( $this->data ); ?></td>
+    <td><?php echo $this->currency( $this->data->fn_lancamento_valor ); ?></td>
+    <td><?php echo $this->nomenclatura()->pgtoLancamento( $this->data ); ?></td>
+</tr>

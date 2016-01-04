@@ -1,0 +1,27 @@
+<table id="relatorio">
+	<thead>
+		<tr>
+			<th><?php echo $this->translate()->_( 'Data' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Conta Débito' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Conta Crédito' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Valor' ); ?></th>
+		</tr>
+	</thead>
+
+    <tbody>
+		<?php echo $this->partialLoop( 'transferencia/row.phtml', $this->data['data'] ); ?>
+	</tbody>
+	
+	<tfoot>
+    	<tr>
+		    <td colspan="3">
+				<?php echo $this->translate()->_( 'Total' ); ?>
+		    </td>
+		    <td>
+		    	<strong>
+		    		<?php echo $this->currency( $this->data['total'] ); ?>
+		    	</strong>
+		    </td>
+    	</tr>
+    </tfoot>
+</table>

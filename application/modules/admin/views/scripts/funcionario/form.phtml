@@ -1,0 +1,32 @@
+<div class="elementosForm customForm">
+
+    <?php 
+
+	$this->placeholder( 'form' )->captureStart(); 
+
+	    $this->tabContainer()->captureStart( 'tabs-func', 
+						 array(), 
+						 array( 'style' => 'width: 750px; height: 310px') );
+
+		$this->contentPane()->captureStart( 'tab-func', array( 'title' => 'Dados' ) );
+
+		    echo $this->form->getDisplayGroup( 'elementos-func' );
+
+		echo $this->contentPane()->captureEnd( 'tab-func' );
+
+		$this->contentPane()->captureStart( 'tab-user', array( 'title' => 'Usuário' ) );
+
+		    echo $this->form->getDisplayGroup( 'elementos-user' );
+
+		echo $this->contentPane()->captureEnd( 'tab-user' );
+
+	    echo $this->tabContainer()->captureEnd( 'tabs-func' );
+
+	    echo $this->form->getDisplayGroup( 'toolbar' );
+
+	$this->placeholder( 'form' )->captureEnd(); 
+
+	echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder( 'form' ) );  
+     ?>
+ 
+</div>

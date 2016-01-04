@@ -1,0 +1,28 @@
+<div class="mainTela">
+    <div dojoType="dijit.layout.BorderContainer" class="borderToolbar">
+        <?php 
+	      echo $this->toolbar()
+			->setDefaultButtons( array( 'salvar', 'atualizar' ) )
+			->addCustomButton(
+			    array(
+				'action' => App_Plugins_Acl::getIdentifier( '/almoxarifado/estoque/', 'Ajustar' ),
+				'id'     => 'button-ajustar-estoque',
+				'label'  => 'Ajustar',
+				'icon'   => 'icon-toolbar-tablegear',
+				'click'  => 'almoxarifadoEstoque.ajustar();'
+			    )
+			)
+			->addCustomButton(
+			    array(
+				'action' => App_Plugins_Acl::getIdentifier( '/almoxarifado/estoque/', 'Visualizar' ),
+				'id'     => 'button-visualizar-estoque',
+				'label'  => 'Visualizar',
+				'icon'   => 'icon-toolbar-eye',
+				'click'  => 'almoxarifadoEstoque.visualizar();'
+			    )
+			); 
+	?>
+    </div>
+    <div id="gridAlmoxarifadoEstoque" class="gridTela"></div>
+    <div id="divpagAlmoxarifadoEstoqueGrid" class="pagingBlock"></div>
+</div>

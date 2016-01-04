@@ -1,0 +1,128 @@
+<?php $this->placeholder('form')->captureStart(); 
+if ( isset( $this->editDocFiscal)){ 
+
+    if(!$this->editDocFiscal){
+        
+        echo '<p class="hint_alert">'.$this->translate()->_( 'Nota fiscal vinculada em lançameto efetivado!' ).'</p>';
+    }else{
+        
+        if(!empty($this->lancamentosEmDocFiscal))
+            echo '<p class="hint">'.$this->translate()->_( 'Nota fiscal vinculada em lançameto não efetivado!' ).'</p>';
+    }
+}
+?>
+<div class="elementosForm customForm" style="position: relative">
+
+	<div class="columns" style="width:350px;">
+		<?php echo $this->form->getDisplayGroup('left'); ?>
+	</div>
+
+	<div class="columns" style="width:350px">
+		<?php echo $this->form->getDisplayGroup('right'); ?>
+	</div>
+
+    <div class="gridItens" style="width: 750px;height: 380px;clear:both;overflow-y: auto;overflow-x: hidden">
+        <table style="width: 730px">
+            <thead>
+                <tr>
+                    <th><?php echo $this->translate()->_('Descrição'); ?></th>
+                    <th><?php echo $this->translate()->_('Quantidade'); ?></th>
+                    <th><?php echo $this->translate()->_('Valor Unitário'); ?></th>
+                    <th><?php echo $this->translate()->_('Valor Total'); ?></th>
+                    <th style="width:8%">
+                        <?php if( !isset($this->editDocFiscal)){ ?>
+
+                            <a title="Adicionar Tipo de Lançamento" href="javascript:financeiroDocumentoFiscal.addItenDocFiscal()">
+                                <div class="icon-toolbar-add" style="margin:0 auto;"></div>
+                            </a>
+                        <?php }else{ ?>
+                            <?php if( $this->editDocFiscal ){ ?>
+
+                                <a title="Adicionar Tipo de Lançamento" href="javascript:financeiroDocumentoFiscal.addItenDocFiscal()">
+                                    <div class="icon-toolbar-add" style="margin:0 auto;"></div>
+                                </a>
+                            <?php }else{ ?>
+                                
+                                <div class="icon-toolbar-bulletblack" style="margin:0 auto;"></div>
+                            <?php }?>
+                         <?php }?>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbl-itens-doc-fiscal">
+                <?php if (!empty( $this->itensDocFiscal)) :
+
+                        foreach ( $this->itensDocFiscal as $itenDocFiscal) : ?>
+                        <tr>
+                            <td>
+                                    <input type="hidden"
+                                       id="<?php echo 'fn_doc_fiscal_itens_id_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>"
+                                       name="fn_doc_fiscal_itens_id[]"
+                                       value="<?php echo $itenDocFiscal->fn_doc_fiscal_itens_id; ?>"/>
+
+                                    <input dojoType="dijit.form.ValidationTextBox"
+                                       name="fn_doc_fiscal_item_descricao[]"
+                                       <?php echo ( empty($this->editDocFiscal) ? 'readOnly="readOnly"' : ''); ?>
+                                       id="<?php echo 'fn_doc_fiscal_item_descricao_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>"
+                                       value="<?php echo $itenDocFiscal->fn_doc_fiscal_item_descricao; ?>" />
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.NumberSpinner"
+                                       name="fn_doc_fiscal_item_qtde[]"
+                                       id="<?php echo 'fn_doc_fiscal_item_qtde_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>"
+                                       regExp="^\d{0,}$"
+                                       constraints="{min:1}"
+                                       <?php echo ( empty($this->editDocFiscal) ? 'readOnly="readOnly"' : ''); ?>
+                                       onchange="financeiroDocumentoFiscal.somaValorTotal('<?php echo 'fn_doc_fiscal_item_qtde_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>',
+                                                                                          '<?php echo 'fn_doc_fiscal_item_valor_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>',
+                                                                                          '<?php echo 'fn_doc_fiscal_item_total_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>');"
+                                       
+                                       value="<?php echo $itenDocFiscal->fn_doc_fiscal_item_qtde; ?>" />
+
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.CurrencyTextBox"
+                                       name="fn_doc_fiscal_item_valor[]"
+                                       <?php echo ( empty($this->editDocFiscal) ? 'readOnly="readOnly"' : ''); ?>
+                                       value="<?php echo $itenDocFiscal->fn_doc_fiscal_item_valor; ?>"
+                                       currency="R$ "
+                                       id="<?php echo 'fn_doc_fiscal_item_valor_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>"
+                                       onchange="financeiroDocumentoFiscal.somaValorTotal('<?php echo 'fn_doc_fiscal_item_qtde_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>',
+                                                                                          '<?php echo 'fn_doc_fiscal_item_valor_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>',
+                                                                                          '<?php echo 'fn_doc_fiscal_item_total_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>');"
+                                       required="true" />
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.CurrencyTextBox"
+                                       name="fn_doc_fiscal_item_total[]"
+                                       id="<?php echo 'fn_doc_fiscal_item_total_'.$itenDocFiscal->fn_doc_fiscal_itens_id; ?>"
+                                       value="<?php echo $itenDocFiscal->fn_doc_fiscal_item_total; ?>"
+                                       currency="R$ "
+                                       readOnly="readOnly"
+                                       required="true" />
+                            </td>
+                            <td>
+                                <?php if( empty($this->editDocFiscal) ){ ?>
+                                    <div title="Não Remove Tipo Lançamento"
+                                        style="cursor: pointer" class="icon-toolbar-bulletblack"></div>
+                                        <?php }else{?>
+                                    <div title="Remover Tipo Lançamento"
+                                        onClick="financeiroDocumentoFiscal.removeItenDocFiscal( this );"
+                                        style="cursor: pointer" class="icon-toolbar-cancel"></div>
+                                <?php }?>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php echo $this->form->getDisplayGroup('toolbar'); ?>
+</div>
+
+<?php $this->placeholder('form')->captureEnd(); ?>
+
+<?php echo $this->form($this->form->getId(), $this->form->getAttribs(), $this->placeholder('form')); ?>

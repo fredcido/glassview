@@ -1,0 +1,18 @@
+<table id="relatorio">
+    <tbody>
+        <?php echo $this->partialLoop('fatura-cartao/row.phtml', $this->data['fat']); ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                <?php echo $this->translate()->_('Total'); ?>
+            </td>
+            <td colspan="2">
+                <strong>
+                    <?php echo $this->currency($this->data['total']); ?>
+                </strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,28 @@
+<html>
+<head></head>
+<body>
+	<div>
+		<p><?php echo $this->row->usuario_nome; ?>,</p>
+		
+		<p>Recebemos um pedido para redefinir a senha para a sua conta.</p>
+		
+		<p>
+			Se voc&ecirc; deseja redefinir sua senha, clique no link abaixo 
+			(ou copie e cole a URL em seu navegador):
+			<br /> 
+			<a href="<?php echo $this->url; ?>"><?php echo $this->url; ?></a>
+			<br />
+			Este link leva para uma p&aacute;gina segura onde uma nova senha 
+			ser&aacute; gerada e enviada para este e-mail.
+		</p>
+		
+		<p>
+			Se voc&ecirc; n&atilde;o deseja redefinir sua senha, por favor, 
+			ignore esta mensagem, n&atilde;o se preocupe, 
+			a seguran&ccedil;a da sua conta n&atilde;o foi comprometida.
+		</p>
+		
+		<p>Muito Obrigado.</p>
+	</div>
+</body>
+</html>

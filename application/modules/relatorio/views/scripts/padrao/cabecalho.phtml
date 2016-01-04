@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<link rel="stylesheet" href="<?php echo empty($this->path) ? $this->baseUrl('public/styles/report.css') : ($this->path . '/public/styles/report.css'); ?>" />
+
+<table>
+	<tr>
+		<td style="width:1%"><img alt="" src="<?php echo empty($this->path) ? $this->baseUrl('public/images/logo-report.png') : ($this->path . '/public/images/logo-report.png'); ?>" /></td>
+		<td><h1><?php echo $this->titulo; ?></h1></td>
+		<td style="width:1%"><span><?php echo Zend_Date::now(); ?></span></td>
+	</tr>
+</table>

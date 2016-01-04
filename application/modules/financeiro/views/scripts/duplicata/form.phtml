@@ -1,0 +1,114 @@
+<?php $this->placeholder('form')->captureStart(); ?>
+
+<div class="elementosForm customForm" style="position: relative">
+
+	<div class="columns" style="width:350px;">
+		<?php echo $this->form->getDisplayGroup('left'); ?>
+	</div>
+
+	<div class="columns" style="width:350px">
+		<?php echo $this->form->getDisplayGroup('right'); ?>
+	</div>
+
+    
+    <div class="gridItens" style="width: 750px;height: 400px;clear:both;overflow-y: auto;overflow-x: hidden">
+        <table style="width: 700px">
+            <thead>
+                <tr>
+                    <th><?php echo $this->translate()->_('Parcela'); ?></th>
+                    <th><?php echo $this->translate()->_('Vencimento'); ?></th>
+                    <th><?php echo $this->translate()->_('Valor'); ?></th>
+                    <?php echo ( empty($this->parcelas) ? '' : '<th>'.$this->translate()->_('Conta').'</th>' ); ?>
+                    <th><?php echo $this->translate()->_('Situação'); ?></th>
+                </tr>
+            </thead>
+            <tbody id="tbl-parcelas-duplicata">
+                <?php if (!empty( $this->parcelas)) :
+                    
+                        $date = new Zend_Date();
+                        $contParc = 1;
+                        $totaParc = count($this->parcelas);
+                        $key = date('dis');
+                        foreach ( $this->parcelas as $parcelas) : 
+                        $key++;
+                            ?>
+                        
+                        <tr>
+                            <td>
+                               <?php 
+                               echo $contParc.'/'.$totaParc; $contParc++; 
+                               
+                                echo $this->form->getElement('id_parcela')
+                                        ->setValue( $parcelas->fn_lancamento_id );
+
+                               ?> 
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.DateTextBox"
+                                        name="fn_lancamento_data[]"
+                                        required="true"
+                                        <?php echo (empty($this->qtdparcelaseftivadas) ? '' : 'readOnly="readOnly"')?>
+                                        value="<?php echo $date->set($parcelas->fn_parcela_vencimento)->toString( 'yyyy-MM-dd' ); ?>" />
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.CurrencyTextBox"
+                                       name="fn_lancamento_valor[]"
+                                       required="true"
+                                       constraints="{min:1}"
+                                       currency="R$ "
+                                       <?php echo (empty($this->qtdparcelaseftivadas) ? '' : 'readOnly="readOnly"')?>
+                                       value="<?php echo $parcelas->fn_parcela_valor; ?>" />
+
+                            </td>
+                            <td>
+                                    <?php 
+                                            echo $this->form->getElement('id_conta')
+                                                    ->setAttrib('id', 'fn_conta_id_' . $key)
+                                                    ->setAttrib('style', 'width: 200px')
+                                                    ->setAttrib('labelAttr', 'label')
+                                                    ->setAttrib('labelType', 'html')
+                                                    ->setAttrib('readOnly', (empty($parcelas->fn_lancamento_efetivado) ? null : 'readOnly'))
+                                                    ->setValue( $parcelas->fn_conta_id )
+                                                    ->setDecorators( array('DijitElement') );
+                                    ?>
+                            </td>
+                            <td>
+                               <?php 
+                               
+                                if($parcelas->fn_lancamento_efetivado){
+                                    
+                                    echo $this->translate()->_('Pago');
+                                } else{
+                                    
+                                    $dataAtual = Zend_Date::now();
+                                    $dataVenc  = $date->set( $parcelas->fn_parcela_vencimento , 'yyyy-MM-dd' );
+                                    
+                                    if($dataAtual <= $dataVenc){
+                                        
+                                        echo $this->translate()->_('A vencer');
+                                    }else{
+                                        
+                                        echo $this->translate()->_('Em atraso');
+                                    }
+                                    
+                                }
+                                
+                                ?> 
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php echo $this->form->getDisplayGroup('toolbar'); ?>
+</div>
+
+<?php
+
+$this->placeholder('form')->captureEnd(); 
+echo $this->form($this->form->getId(), $this->form->getAttribs(), $this->placeholder('form'));
+require_once( 'application/modules/financeiro/views/scripts/documento-fiscal/dialog-busca.phtml');

@@ -1,0 +1,61 @@
+<?php $this->placeholder('form')->captureStart(); ?>
+
+    <div class="elementosForm customForm" style="position: relative">
+    
+	<div class="columns" style="width:400px;">
+	    <?php echo $this->form->getDisplayGroup( 'elementos_form' ); ?>
+	</div>
+	
+	<div class="columns gridItens" style="width:225px; margin:0 0 10px 0;">
+		<table>
+			<thead>
+				<tr>
+					<th>Privil&eacute;gios</th>
+					<th style="width:15%">
+					    <a title="Adicionar privilégio" href="javascript:masterAcao.addPrivilegio()">
+							<div class="icon-toolbar-add" style="margin:0 auto;"></div>
+					    </a>
+					</th>
+				</tr>
+			</thead>
+			
+			<table>
+				<tr>
+					<td>
+						<div style="height:100px; overflow-y:auto;">
+							<table>
+								<tbody id="tbl-privilegio-acao">
+			    					<?php if ( !empty( $this->privilegios ) ) : ?>
+			
+										<?php foreach ( $this->privilegios as $privilegio ) : ?>	
+										    <tr>
+												<td>
+												    <input dojoType="dijit.form.ValidationTextBox" 
+													   name="privilegios_base[<?php echo $privilegio->privilegios_id; ?>]" 
+													   value="<?php echo $privilegio->privilegios_action; ?>" required="true" />
+												</td>
+												<td>
+												    <div title="Remover Privilégio" onClick="masterAcao.removePrilegioBase( <?php echo $privilegio->privilegios_id; ?>, this );"
+													 style="cursor: pointer" class="icon-toolbar-cancel"></div>
+												</td>
+										    </tr>
+										    
+										<?php endforeach; ?>
+			    
+			    					<?php endif; ?>
+								</tbody>						
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+		</table>
+	</div>
+	
+	<?php echo $this->form->getDisplayGroup( 'toolbar' ); ?>
+    </div>
+	
+<?php $this->placeholder('form')->captureEnd(); ?>
+
+<?php echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') ); ?>

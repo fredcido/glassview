@@ -1,0 +1,28 @@
+<table id="relatorio">
+    <tbody>
+        <tr>
+            <th><?php echo $this->translate()->_( 'Data' ); ?></th>
+            <th><?php echo $this->translate()->_( 'N. do documento' ); ?></th>
+            <th><?php echo $this->translate()->_( 'Remetente' ); ?></th>
+            <th><?php echo $this->translate()->_( 'Memória' ); ?></th>
+            <th><?php echo $this->translate()->_( 'Conta' ); ?></th>
+            <th><?php echo $this->translate()->_( 'Fluxo' ); ?></th>
+            <th><?php echo $this->translate()->_( 'Valor' ); ?></th>
+        </tr>
+        
+        <?php echo $this->partialLoop('conta/row.phtml', $this->data['lanc']); ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                <?php echo $this->translate()->_('Total'); ?>
+            </td>
+            <td colspan="2">
+                <strong>
+                    <?php echo $this->currency($this->data['total']); ?>
+                </strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>

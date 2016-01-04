@@ -1,0 +1,26 @@
+<table id="relatorio">
+    <tbody>
+        <?php
+            $_SESSION['Header_Projeto'] = false;
+            echo $this->partialLoop('conta-projeto/row.phtml', $this->data['lanc']); 
+        ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                <?php echo $this->translate()->_('Total Geral'); ?>
+            </td>
+            <td colspan="0">
+                <strong>
+                    <?php echo $this->currency($this->data['total']); ?>
+                </strong>
+            </td>
+            <td colspan="0">
+                <strong>
+                    <?php echo $this->currency($this->data['totalprojeto']); ?>
+                </strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>

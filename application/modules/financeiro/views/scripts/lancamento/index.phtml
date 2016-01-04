@@ -1,0 +1,116 @@
+<div class="mainTela">
+    <div dojoType="dijit.layout.BorderContainer" class="borderToolbar">
+        <?php 
+        	echo $this->toolbar()
+				->addCustomButton(
+					array(
+						'action' 	=> App_Plugins_Acl::getIdentifier( '/financeiro/lancamento/', 'Transferência' ),
+						'id' 		=> 'button-tranferencia-lancamento',
+						'label' 	=> 'Transferência',
+						'icon' 		=> 'icon-toolbar-arrowrefreshsmall',
+						'click' 	=> 'financeiroLancamento.formTransferencia();'
+					)
+				)
+				->addCustomButton(
+					array(
+						'action' 	=> App_Plugins_Acl::getIdentifier( '/financeiro/lancamento/', 'Pagamento' ),
+						'id' 		=> 'button-pagamento-lancamento',
+						'label' 	=> 'Efetivar',
+						'icon' 		=> 'icon-toolbar-lorry',
+						'click' 	=> 'financeiroLancamento.formPagamento();'
+					)
+				); 
+    	?>
+    </div>
+    
+	<?php
+		$this->tabContainer()->captureStart(
+			'containerContas',
+			array('design' => 'headline'), 
+			array('doLayout' => 'false'), 
+			array('style'=>'height:99%;width:100%') 
+		);
+	?>
+		
+		<?php
+			$this->contentPane()->captureStart(
+				'contas-pagar',
+				array(
+					'region'    => 'top',
+					'title'     => 'Contas a Pagar',
+					'iconClass' => 'icon-toolbar-applicationsidecontract'
+				),
+				array('style' => 'background-color: white;')
+			);
+		?>
+
+			<div id="gridFinanceiroLancamentoSaida" class="gridTela"></div>
+			<div id="divpagFinanceiroLancamentoSaidaGrid" class="pagingBlock"></div>
+
+		<?php echo $this->contentPane()->captureEnd('contas-pagar'); ?>
+
+		<?php
+			$this->contentPane()->captureStart(
+				'contas-receber',
+				array(
+					'region'    => 'top',
+					'title'     => 'Contas a receber',
+					'iconClass' => 'icon-toolbar-applicationsideexpand',
+					'onClick' 	=> 'console.log("receber")'
+				),
+				array(
+					'style' 	=> 'background-color: white;',
+					'onClick' 	=> 'console.log("receber")'
+				)
+			);
+		?>
+		
+        	<div id="gridFinanceiroLancamentoEntrada" class="gridTela"></div>
+        	<div id="divpagFinanceiroLancamentoEntradaGrid" class="pagingBlock"></div>
+
+		<?php echo $this->contentPane()->captureEnd('contas-receber'); ?>
+		
+		<?php
+			$this->contentPane()->captureStart(
+				'transferencias',
+				array(
+					'region'    => 'top',
+					'title'     => 'Transferências',
+					'iconClass' => 'icon-toolbar-arrowrefreshsmall',
+					'onClick'   => 'console.log("transferencia")'
+				),
+				array(
+					'style' 	=> 'background-color: white;',
+					'onClick' 	=> 'console.log("transferncia")'
+				)
+			);
+		?>
+		
+        	<div id="gridFinanceiroTransferencia" class="gridTela"></div>
+        	<div id="divpagFinanceiroTransferenciaGrid" class="pagingBlock"></div>
+
+		<?php echo $this->contentPane()->captureEnd('transferencias'); ?>
+		
+		<?php
+			$this->contentPane()->captureStart(
+				'efetivados',
+				array(
+					'region'    => 'top',
+					'title'     => 'Efetivados',
+					'iconClass' => 'icon-toolbar-lorry',
+					'onClick'   => 'console.log("efetivados")'
+				),
+				array(
+					'style' 	=> 'background-color: white;',
+					'onClick' 	=> 'console.log("efetivados")'
+				)
+			);
+		?>
+		
+        	<div id="gridFinanceiroEfetivados" class="gridTela"></div>
+        	<div id="divpagFinanceiroEfetivadosGrid" class="pagingBlock"></div>
+
+		<?php echo $this->contentPane()->captureEnd('efetivados'); ?>
+                             
+	<?php echo $this->tabContainer()->captureEnd('containerContas'); ?>
+</div>

@@ -1,0 +1,46 @@
+<?php
+    $this->borderContainer()->captureStart( 'borderBudget', array( 'liveSplitters' => 'false' ), array( 'style' => 'width: 1150px; height: 550px' ) );
+
+	// CONTENT DO FORM
+	$this->contentPane()->captureStart( 'topo-budget', array( 'region' => 'top' ), array( 'style' => 'height: 13%' ) );
+	    
+	    ?>
+
+	    <div class="elementosForm customForm">
+
+		<?php
+
+		    // FORM
+		    $this->placeholder('form')->captureStart();
+
+			echo $this->form->getDisplayGroup( 'elementos_form' );
+
+		    $this->placeholder('form')->captureEnd();
+
+		    echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') );
+
+		?>
+		
+	    </div>
+		
+	    <?php
+	
+	echo  $this->contentPane()->captureEnd( 'topo-budget' );
+	
+	// CONTENT DAS GRIDS
+	$this->contentPane()->captureStart( 'corpo-budget', array( 'region' => 'center' ), array() );
+	
+	    ?>
+		<div id="controle-budget" style="width: 98%; height: 98%; margin: 0 auto"></div>
+	    <?php
+	    
+	echo  $this->contentPane()->captureEnd( 'corpo-budget' );
+	
+	// CONTENT DA TOOLBAR
+	$this->contentPane()->captureStart( 'rodape-budget', array( 'region' => 'bottom' ), array( 'style' => 'height: 6%' ) );
+	
+	    echo $this->form->getDisplayGroup( 'toolbar' );
+   
+	echo  $this->contentPane()->captureEnd( 'rodape-budget' );
+       
+   echo $this->borderContainer()->captureEnd( 'borderBudget' );

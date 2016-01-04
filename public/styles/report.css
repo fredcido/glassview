@@ -1,0 +1,68 @@
+* {
+	font-family: "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+	font-weight: normal;
+}
+
+table {
+	width:95%;
+	margin:1em auto;
+	border-collapse:collapse;
+	font-size: 13px;
+	clear: both;
+	border:1px solid #e3f1fe;
+	color:#999;
+}
+table#relatorio {
+	border-style:none;
+	border-top:1px solid #e3f1fe;
+	border-right:1px solid #e3f1fe;
+}
+h1 {
+	font-weight: bold;
+	padding:0;
+	margin:0;
+}
+table#relatorio tr.one {
+	background: #FFF;
+}
+table#relatorio tr.two {
+	background: #f1f7fb;
+}
+table#relatorio th	{
+	background:#f4f9fe url(../images/bg-report.gif) no-repeat;
+}
+table#relatorio td {
+	color:#678197;
+	border-bottom: 1px solid #e3f1fe;
+	border-left:1px solid #e5eff8;
+}
+td {
+	padding:.3em 1em; 
+	text-align:center;
+}
+table#relatorio th {
+	font-weight:bold;
+	color: #678197;
+	text-align:left;
+	border-bottom: 1px solid #e3f1fe;
+	border-left:1px solid #e5eff8;
+	padding:.3em 1em;
+}	
+table#relatorio thead th {
+	background:#f4f9fe;
+	text-align:center;
+	color:#66a3d3
+}				
+table#relatorio tfoot th {
+	background:#f4f9fe;
+	text-align:center;
+}	
+table#relatorio tfoot th strong {
+	margin:.5em .5em .5em 0;
+	color:#66a3d3;
+}		
+table#relatorio tfoot th em {
+	color:#f03b58;
+	font-weight: bold;
+	font-style: normal;
+}

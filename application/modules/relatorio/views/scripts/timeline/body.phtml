@@ -1,0 +1,13 @@
+<table id="relatorio">
+    <thead>
+	    <tr>
+			<th><?php echo $this->translate()->_('Projeto'); ?></th>
+		    <th><?php echo $this->translate()->_('Atividade Principal'); ?></th>
+		    <th colspan="2"><?php echo $this->translate()->_('Horas Trabalhadas'); ?></th>
+		    <th><?php echo $this->translate()->_('Custo'); ?></th>
+		</tr>
+	</thead>
+    <tbody>
+        <?php echo $this->partialLoop( 'timeline/row.phtml', $this->data ); ?>
+    </tbody>
+</table>

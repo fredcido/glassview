@@ -1,0 +1,126 @@
+<?php $this->placeholder('form')->captureStart(); ?>
+
+<div class="elementosForm customForm" style="position: relative">
+
+	<?php
+                $mapperTipoLancamento = new Model_Mapper_TipoLancamento();
+                
+		if ( !empty($this->rowsCheque) ) {
+			foreach ( $this->rowsCheque as $key => $rowCheque ) { 
+				echo $this->form->getElement( 'fn_cheque_id' )
+					->setAttrib( 'id', 'fn_cheque_id_' . $key )
+					->setValue( $rowCheque->fn_cheque_id );
+			}	
+		}
+	?>
+
+	<div class="columns" style="width:400px;">
+		<?php echo $this->form->getDisplayGroup('left'); ?>
+	</div>
+	
+	<div class="columns" style="width:400px">
+		<?php echo $this->form->getDisplayGroup('right'); ?>
+	</div>
+
+	<div class="gridItens" style="width:auto; clear:both;">
+		<table>
+			<thead>
+				<tr>
+					<th><?php echo $this->translate()->_('Projeto'); ?></th>
+					<th><?php echo $this->translate()->_('Tipo Lançamento'); ?></th>
+                                        <th></th>
+					<th><?php echo $this->translate()->_('Valor'); ?></th>
+					<th style="width:1%">
+						<a href="javascript:financeiroLancamento.addTipoLancamento()">
+							<div class="icon-toolbar-add" style="margin:0 auto;"></div>
+						</a>
+					</th>
+				</tr>
+			</thead>
+			
+			<tbody id="tbl-lancamento-tipo">
+				<?php if ( !empty($this->rows) && $this->rows->count() ): ?>
+										
+					<?php 
+                                            $key = date('dis');
+                                            foreach ( $this->rows as $row ): 
+                                            $key++;
+                                         ?>
+						<tr id="trid_<?php echo $key; ?>">
+							<td>
+								<?php 
+									echo $this->form->getElement('projeto_id')
+										->setAttrib('id', 'projeto_' . $key)
+										->setAttrib('style', 'width: 200px')
+										->setAttrib('labelAttr', 'label')
+										->setAttrib('labelType', 'html')
+										->setValue( $row->projeto_id )
+                                                                                ->setDecorators( array('DijitElement') );
+								?>
+							</td>
+							<td>						
+								<?php
+        
+        
+                                                                        $pathTipoLancamento = $mapperTipoLancamento->montaPathTipoLancamentoTreeProjeto( $row->fn_tipo_lanc_id );
+
+                                                                        
+									echo $this->form->getElement('text_lancamento')
+										->setAttrib('id', 'tipolan_' . $key)
+										->setAttrib('style', 'width: 200px')
+										->setAttrib('labelAttr', 'label')
+										->setAttrib('labelType', 'html')
+										->setValue( $pathTipoLancamento )
+										->setDecorators( array('DijitElement') );
+                                                                        
+                                                                        //Hidden
+									echo $this->form->getElement('fn_tipo_lanc_id')
+										->setAttrib('id', 'vltplan_' . $key)
+										->setValue( $row->fn_tipo_lanc_id );
+								?>
+							</td>
+							<td>
+                                                        <button dojoType="dijit.form.Button"
+                                                                id="buttonn_<? echo $key; ?>"
+                                                                disabled="true"
+                                                                onClick="financeiroLancamento.changeTipoLancamento(this);"
+                                                                iconClass="icon-toolbar-applicationformmagnify"></button>
+							</td>
+							<td>
+								<?php
+									echo $this->form->getElement('fn_lanc_projeto_valor')
+										->setAttrib('id', 'valorpr_' . $key)
+										->setValue( $row->fn_lanc_projeto_valor )
+                                                                                ->setAttrib('style', 'width: 200px')
+										->setDecorators( array('DijitElement') ); 
+								?>
+							</td>
+							<td>                                
+	                            <div onClick="financeiroLancamento.removeTipoLancamento(<?php echo $key; ?>, this);" class="icon-toolbar-cancel" style="cursor: pointer;">
+	                            </div>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</tbody>
+		</table>
+	</div>
+	
+	<?php 
+	    if ( empty( $this->efetivado ) ){
+        
+		echo $this->form->getDisplayGroup('toolbar'); 
+            }
+	?>
+</div>
+
+<?php $this->placeholder('form')->captureEnd(); ?>
+
+<?php
+	//Dialogs
+	echo $this->render( 'documento-fiscal/dialog-busca.phtml' );
+	echo $this->render( 'cheque/dialog-busca.phtml' ); 
+	
+	//Formulario
+	echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') ); 
+?>

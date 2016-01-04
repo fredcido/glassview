@@ -1,0 +1,19 @@
+<?php $this->placeholder('form')->captureStart(); ?>
+
+    <div class="elementosForm customForm">
+    
+	<div>
+	    <?php echo $this->form->getElement( 'perfil_id' ); ?>
+	</div>
+	
+	<div style="width: 400px; height: 350px;" class="container-tree">
+	    <div class="title-header">Telas</div>
+	    <div id="tree-permissoes"></div>
+	</div>
+	
+	<?php echo $this->form->getDisplayGroup( 'toolbar' ); ?>
+    </div>
+	
+<?php $this->placeholder('form')->captureEnd(); ?>
+
+<?php echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') ); ?>

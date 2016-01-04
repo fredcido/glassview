@@ -1,0 +1,78 @@
+<?php
+        $this->headScript()->appendFile( $this->baseUrl( 'public/scripts/js/jquery-1.6.2.min.js' ) );
+        $this->headScript()->appendFile( $this->baseUrl( 'public/scripts/js/jquery-ui-1.8.14.custom.min.js' ) );
+        $this->headScript()->appendFile( $this->baseUrl( 'public/scripts/js/auth.js' ) );
+	
+?>
+
+
+   <div class="cont fixed">
+     <div class="wrapper">
+         
+         <div class="block login">
+            <div class="top">
+               <div class="black">
+                  <h2>Login</h2>
+               </div>
+               <div class="gray">
+                  <ul>
+                     <li><a class="active" href="login">Login</a></li>
+                     <li><a href="recover_password"><?php echo $this->translate()->_('Recuperação de senha') ?></a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="content">
+                <div id="login" class="login-tabs active">
+
+                        <?php $this->placeholder('formAuth')->captureStart(); ?>
+                                <div class="msg" >
+                                        <div class="info"><?php echo $this->translate()->_('Por favor informe seu usuário e senha.') ?></div>
+                                </div>
+                                <p>
+                                        <label><?php echo $this->translate()->_('Usuário') ?></label><br/>
+                                        <?php echo $this->formAuth->getElement('usuario'); ?>
+                                </p>
+                                <p>
+                                        <label><?php echo $this->translate()->_('Senha') ?></label><br/>
+                                        <?php echo $this->formAuth->getElement('senha'); ?>
+                                </p>
+                                <p>
+                                        <input type="submit" class="black small" value="<?php echo $this->translate()->_('Enviar') ?>" />
+                                        <label>
+                                                <?php echo $this->formAuth->getElement('remember'); ?>
+                                                <?php echo $this->translate()->_('Continuar logado') ?>
+                                        </label>
+                                </p>
+                    <?php 
+                        $this->placeholder('formAuth')->captureEnd(); 
+
+                        echo $this->form( $this->formAuth->getId(), 
+                                          $this->formAuth->getAttribs(), 
+                                          $this->placeholder('formAuth'));
+                    ?>
+                </div>
+                <div id="recover_password" class="login-tabs">
+                    <?php $this->placeholder('formRecovery')->captureStart(); ?>
+                               <div class="msg" >
+                                        <div class="info"><?php echo $this->translate()->_('Por favor informe seu e-mail.') ?></div>
+                                </div>
+                                <p>
+                                        <label>E-mail</label><br/>
+                                        <?php echo $this->formRecovery->getElement('email'); ?>
+                                </p>
+                                <p>
+                                    <input type="submit" class="black small" value="<?php echo $this->translate()->_('Enviar') ?>"/>
+                                </p>
+                        <?php 
+                            $this->placeholder('formRecovery')->captureEnd(); 
+                            echo $this->form( $this->formRecovery->getId(), 
+                                              $this->formRecovery->getAttribs(), 
+                                              $this->placeholder('formRecovery'));
+                        ?>
+                </div>
+            </div>
+         </div>
+      </div>
+   </div>
+    
+    <script type="text/javascript">$(document).ready(mbe.login.ready);</script>

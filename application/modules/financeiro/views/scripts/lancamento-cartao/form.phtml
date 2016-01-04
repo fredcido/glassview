@@ -1,0 +1,133 @@
+<?php  $this->placeholder('form')->captureStart(); ?>
+
+<div class="elementosForm customForm" style="position: relative">
+
+	<div class="columns" style="width:350px;">
+		<?php echo $this->form->getDisplayGroup('left'); ?>
+	</div>
+
+	<div class="columns" style="width:350px">
+		<?php echo $this->form->getDisplayGroup('right'); ?>
+	</div>
+
+    <div class="gridItens" style="clear:both;">
+        <table style="width: 700px">
+            <thead>
+                <tr>
+                    <th>Projeto</th>
+                    <th>Tipo Lançamento</th>
+                    <th style="width:8%"></th>
+                    <th>Valor</th>
+                    <th style="width:8%">
+                        <?php if ( $this->lancfat ){ ?>
+
+                            <div class="icon-toolbar-bulletblack" style="margin:0 auto;"></div>
+                        <?php }else{ ?>
+                            
+                            <a title="Adicionar Tipo de Lançamento" href="javascript:financeiroLancamentoCartao.addTipoLancamento()">
+                                <div class="icon-toolbar-add" style="margin:0 auto;"></div>
+                            </a>
+                         <?php }?>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbl-lancamento-tipo">
+                <?php 
+                    if (!empty( $this->tiposlancamentos)) : 
+                        
+                        $mapperTipoLancamento = new Model_Mapper_TipoLancamento();
+                        
+                        $key = date('dis');
+                        foreach ( $this->tiposlancamentos as $tiposLancamento) : 
+                            
+                            $key++;
+                ?>	
+                        <tr>
+                            <td>
+                                <select dojoType="dijit.form.FilteringSelect" 
+                                       name="projeto_id[]" 
+                                       readOnly="readOnly"
+                                       id="projeto_<?php echo $key; ?>"
+                                       style="width: 230px;"
+                                       <?php echo ( $this->lancfat ? 'readOnly="readOnly"' : '' ); ?>
+                                       value="<?php echo $tiposLancamento->projeto_id; ?>" 
+                                       onChange="financeiroLancamentoCartao.filteringTipoLancamento( this );"
+                                       required="true" >
+                                       <option value=""></option>
+                                    <?php
+                                        foreach($this->projetos as $projeto){
+                                            echo '<option value="'.$projeto['projeto_id'].'">
+                                                    '.$projeto['projeto_nome'].'</option>';
+                                            
+                                        }
+                                    ?>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="hidden"
+                                       name="fn_tipo_lanc_id[]"
+                                       id="vltplan_<?php echo $key; ?>"
+                                       value="<?php echo $tiposLancamento->fn_lanc_cartao_tipo_id; ?>"/>
+
+                                <input dojoType="dijit.form.ValidationTextBox" 
+                                       name="text_lancamento[]" 
+                                       readOnly="readOnly"
+                                       id="tipolan_<?php echo $key; ?>"
+                                       style="width: 230px;"
+                                       onChange="financeiroLancamentoCartao.validaTipoLancamentoTala(this);"
+				       labelAttr="label"
+                                       labelType="html"
+                                       value="<?php echo $mapperTipoLancamento->montaPathTipoLancamentoTreeProjeto( $tiposLancamento->fn_tipo_lanc_id ); ?>">
+          
+                            </td>
+                            <td>
+                                <button dojoType="dijit.form.Button"
+                                        id="buttonn_<? echo $key; ?>"
+                                        disabled="true"
+                                        <?php echo ( $this->lancfat ? 'disabled="true"' : '' ); ?>
+                                        onClick="financeiroLancamentoCartao.changeTipoLancamento(this);"
+                                        iconClass="icon-toolbar-applicationformmagnify"></button>
+                            </td>
+                            <td>
+                                <input dojoType="dijit.form.CurrencyTextBox" 
+                                       name="fn_lanc_cc_tipo_valor[]" 
+                                       value="<?php echo $tiposLancamento->fn_lanc_cc_tipo_valor; ?>" 
+                                       currency="R$ "
+                                       id="valorpr_<?php echo $key; ?>"
+                                       style="width: 230px;"
+                                       <?php echo ( $this->lancfat ? 'readOnly="readOnly"' : '' ); ?>
+                                       onChange="financeiroLancamentoCartao.somaLancamentos(this);"
+                                       required="true" />
+                            </td>
+                            <td>
+                                <?php if ( $this->lancfat ){ ?>
+                                
+                                    <div style="cursor: pointer" class="icon-toolbar-bulletblack"></div>
+                                <?php }else{ ?>
+                                
+                                    <div title="Remover Tipo Lançamento" 
+                                        onClick="financeiroLancamentoCartao.removeTipoLancamentoTela( <?php echo $tiposLancamento->fn_lanc_cartao_id; ?>, 
+                                                                                                    <?php echo $tiposLancamento->fn_tipo_lanc_id; ?>, 
+                                                                                                    this );"
+                                        style="cursor: pointer" class="icon-toolbar-cancel"></div>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                                                    
+                    <?php endforeach; ?>
+                                            
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php echo $this->form->getDisplayGroup('toolbar'); ?>
+</div>
+
+<?php 
+
+$this->placeholder('form')->captureEnd(); 
+
+echo $this->form($this->form->getId(), $this->form->getAttribs(), $this->placeholder('form'));
+
+require_once( 'application/modules/financeiro/views/scripts/documento-fiscal/dialog-busca.phtml');

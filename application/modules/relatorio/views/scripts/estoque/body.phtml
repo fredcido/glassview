@@ -1,0 +1,18 @@
+<table id="relatorio">
+	<thead>
+		<tr>
+			<th><?php echo $this->translate()->_( 'Data' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Produto' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Movimentação' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Quantidade' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Valor unitário' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Valor final' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Estoque anterior' ); ?></th>
+			<th><?php echo $this->translate()->_( 'Estoque final' ); ?></th>
+		</tr>
+	</thead>
+
+    <tbody>
+		<?php echo $this->partialLoop( 'estoque/row.phtml', $this->data['data']); ?>
+    </tbody>
+</table>

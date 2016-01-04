@@ -1,0 +1,13 @@
+<?php $this->placeholder('form')->captureStart(); ?>
+    <div class="elementosForm customForm">
+	<div style="width: 450px; height: 300px;" class="container-tree">
+	    <div class="title-header">Tipos de lançamento</div>
+	    <div id="tree-tipo-lancamento"></div>
+	</div>
+	
+	<?php echo $this->form->getDisplayGroup( 'toolbar' ); ?>
+    </div>
+
+<?php $this->placeholder('form')->captureEnd(); ?>
+
+<?php echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') ); ?>

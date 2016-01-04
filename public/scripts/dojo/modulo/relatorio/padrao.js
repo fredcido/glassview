@@ -1,0 +1,8 @@
+/*
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
+	Available via Academic Free License >= 2.1 OR the modified BSD license.
+	see: http://dojotoolkit.org/license for details
+*/
+
+
+if(!dojo._hasResource["modulo.relatorio.padrao"]){dojo._hasResource["modulo.relatorio.padrao"]=true;dojo.require("modulo.padrao.geral");dojo.provide("modulo.relatorio.padrao");dojo.declare("modulo.relatorio.padrao",[modulo.padrao.geral],{urlTarget:null,constructor:function(){},visualizar:function(_1){if(!this.validaForm(dijit.byId(_1),this)){return false;}var _2=baseUrl+this.urlTarget+"visualizar/";this.submitPopup(_1,_2);return true;},gerarPdf:function(_3){if(!this.validaForm(dijit.byId(_3),this)){return false;}var _4=baseUrl+this.urlTarget+"gerar-pdf/";this.submitIframe(_3,_4);return true;},gerarExcell:function(_5){if(!this.validaForm(dijit.byId(_5),this)){return false;}var _6=baseUrl+this.urlTarget+"gerar-excell/";this.submitIframe(_5,_6);return true;},submitPopup:function(_7,_8){var _9=dijit.byId(_7);_9.set("action",_8).set("method","post");var _a=this.parseId(_8);var _b=objGeral.newWindow(_8,_a,800,600);_9.set("target",_a);_9.submit();return _b;},submitIframe:function(_c,_d){var _e=dijit.byId(_c);_e.set("action",_d).set("method","post");var _f=this.parseId(_d);_e.set("target",_f);if($("#"+_f)){$("#"+_f).remove();}$("<iframe />").attr("name",_f).attr("id",_f).hide().appendTo("body");_e.submit();},parseId:function(id){return id.replace(/[^0-9a-z]/gi,"").toLowerCase();},validaDatas:function(ini,fim){var _10=dijit.byId(ini);var _11=dijit.byId(fim);_11.constraints.min=!_10.get("value")?undefined:_10.get("value");_10.constraints.max=!_11.get("value")?undefined:_11.get("value");}});}

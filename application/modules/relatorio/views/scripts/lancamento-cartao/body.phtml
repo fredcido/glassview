@@ -1,0 +1,30 @@
+<table id="relatorio">
+    <thead>
+        <tr>
+            <th><?php echo $this->translate()->_('Data'); ?></th>
+            <th><?php echo $this->translate()->_('Cartão'); ?></th>
+            <th><?php echo $this->translate()->_('Bandeira'); ?></th>
+            <th><?php echo $this->translate()->_('Número'); ?></th>
+            <th><?php echo $this->translate()->_('Descrição'); ?></th>
+            <th><?php echo $this->translate()->_('Reconciliado'); ?></th>
+            <th><?php echo $this->translate()->_('Valor'); ?></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php echo $this->partialLoop('lancamento-cartao/row.phtml', $this->data['data']); ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <th colspan="5">
+                <?php echo $this->translate()->_('Total'); ?>
+            </th>
+            <th colspan="2">
+                <strong>
+                    <?php echo $this->currency($this->data['total']); ?>
+                </strong>
+            </th>
+        </tr>
+    </tfoot>
+</table>

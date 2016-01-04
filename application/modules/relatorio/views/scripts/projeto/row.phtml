@@ -1,0 +1,30 @@
+<tr>
+    <th colspan="3"><?php echo $this->value; ?></th>
+</tr>
+<tr>
+	<th><?php echo $this->translate()->_('Funcionário'); ?></th>
+    <th><?php echo $this->translate()->_('Atividade'); ?></th>
+    <th><?php echo $this->translate()->_('Horas Trabalhadas'); ?></th>
+</tr>
+
+<tr>
+	<?php foreach ( $this->data as $funcionario ) : ?>
+	    <td rowspan="<?php echo (count($funcionario['data'])); ?>"><?php echo $funcionario['value']; ?></td>
+    
+    	<?php 
+    		$atividade = current($funcionario['data']);
+    		unset( $funcionario['data'][key($funcionario['data'])] ); 
+    	?>
+    
+		<td><?php echo $atividade['descricao']; ?></td>
+		<td><?php echo $atividade['carga_horaria']; ?>hrs</td>
+	<?php endforeach; ?> 
+</tr>
+
+<tr>
+	<?php foreach ( $funcionario['data'] as $atividade ): ?>
+		<td><?php echo $atividade['descricao']; ?></td>
+		<td><?php echo $atividade['carga_horaria']; ?>hrs</td>
+	<?php endforeach; ?>
+</tr>
+

@@ -1,0 +1,84 @@
+<div id="detalha-lembrete">
+    
+    <div>
+	<label>
+	    <span class="icon-toolbar-usersuit"></span>
+	    <?php echo $this->translate()->_( 'De' ); ?>:
+	</label>
+	<span>
+	    <?php   
+		echo empty( $this->lembrete->usuario ) ? 
+		$this->translate()->_( 'Sistema' ) : 
+		$this->lembrete->usuario; 
+	    ?>
+	</span>
+    </div>
+    
+    <div>
+	<label>
+	    <span class="icon-toolbar-tagblue"></span>
+	    <?php echo $this->translate()->_( 'Título' ); ?>:
+	</label>
+	<span>
+	    <?php echo $this->lembrete->lembrete_titulo; ?>
+	</span>
+    </div>
+    
+    <div>
+	<label>
+	    <span class="icon-toolbar-flagred"></span>
+	    <?php echo $this->translate()->_( 'Nível' ); ?>:
+	</label>
+	<span class="<?php echo $this->lembrete->lembrete_nivel == 0 ? 'urgente' : 'normal'; ?>">
+	    <?php echo $this->translate()->_( $this->lembrete->lembrete_nivel == 0 ? 'Urgente' : 'Normal' ); ?>
+	</span>
+    </div>
+    
+    <div>
+	<label>
+	    <?php echo $this->translate()->_( 'Lembrete' ); ?>:
+	</label>
+    </div>
+    
+    <div class="lembrete-texto">
+	<?php echo $this->lembrete->lembrete_msg; ?>
+    </div>
+    
+    <div dojoType="dijit.layout.BorderContainer" class="borderToolbar">
+        <?php 
+	
+	    if ( empty( $this->lembrete->lembrete_destino_status ) ) {
+		
+		$label = 'Finalizar';
+		$icon = 'icon-toolbar-tick';
+		
+	    } else {
+		
+		$label = 'Reabrir';
+		$icon = 'icon-toolbar-emailgo';
+		
+	    }
+	    
+	    $label = $this->translate()->_( $label );
+	
+	    echo $this->toolbar()
+		      ->setRenderDefaultButtons( false )
+		      ->addCustomButton(
+			    array(
+				'action' => App_Plugins_Acl::getIdentifier( '/default/lembrete/', 'Salvar' ),
+				'id'     => 'button-baixa-lembrete',
+				'label'  => $label,
+				'icon'   => $icon,
+				'click'  => 'defaultLembrete.mudarStatus( ' . $this->lembrete->lembrete_id . ' );'
+			    )
+		      )
+		      ->addCustomButton(
+			    array(
+				'label'  => 'Cancelar',
+				'icon'   => 'dijitEditorIcon dijitEditorIconCancel',
+				'click'  => 'objGeral.closeGenericDialog();'
+			    )
+			); 
+	?>
+    </div>
+</div>

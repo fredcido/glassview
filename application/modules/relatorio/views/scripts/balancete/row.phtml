@@ -1,0 +1,37 @@
+<tr>
+    <th><?php echo $this->translate()->_( 'Data' ); ?></th>
+    <th><?php echo $this->translate()->_( 'N. do documento' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Remetente' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Memória' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Conta' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Fluxo' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Valor' ); ?></th>
+</tr>
+<tr>
+    <td><?php echo $this->date( $this->data->fn_lancamento_data ); ?></td>
+    <td><?php echo $this->data->fn_doc_fiscal_numero; ?></td>
+    <td><?php echo $this->data->terceiro_nome_remetente; ?></td>
+    <td><?php echo $this->data->fn_lancamento_obs; ?></td>
+    <td><?php echo $this->data->fn_conta_descricao; ?></td>
+    <td><?php echo $this->nomenclatura()->tipoLancamento( $this->data ); ?></td>
+    <td><?php echo $this->currency( ( 'C' == $this->data->fn_lancamento_tipo ? 1 : -1 ) * $this->data->fn_lancamento_valor ); ?></td>
+</tr>
+
+<?php if ( !empty( $this->itens ) && !empty( $this->itens[0]->fn_tipo_lanc_cod ) ) : ?>
+    <tr>
+	<th rowspan="<?php echo count( $this->itens ) + 1; ?>">
+		    <?php echo $this->translate()->_( 'Projetos' ); ?>
+	</th>
+	<th colspan="2"><?php echo $this->translate()->_( 'Nome' ); ?></td>
+	<th colspan="2"><?php echo $this->translate()->_( 'Tipo de lançamento' ); ?></td>
+	<th colspan="2"><?php echo $this->translate()->_( 'Valor' ); ?></td>
+    </tr>
+
+    <?php foreach ( $this->itens as $key => $item ) : ?>
+	<tr>
+	    <td colspan="2"><?php echo $item->projeto_nome; ?></td>
+	    <td colspan="2"><?php echo $item->fn_tipo_lanc_cod . ' ' . $item->fn_tipo_lanc_desc; ?></td>
+	    <td colspan="2"><?php echo empty( $item->fn_lanc_projeto_valor ) ? 0 : $this->currency( $item->fn_lanc_projeto_valor ); ?></td>
+	</tr>
+    <?php endforeach; ?>
+<?php endif; ?>

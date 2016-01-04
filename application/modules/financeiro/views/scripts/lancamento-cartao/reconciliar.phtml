@@ -1,0 +1,65 @@
+<?php
+    $this->borderContainer()->captureStart( 'borderReconciliacao', array( 'liveSplitters' => 'false' ), array( 'style' => 'width: 1000px; height: 550px' ) );
+
+	// CONTENT DO FORM
+	$this->contentPane()->captureStart( 'topo-reconciliacao', array( 'region' => 'top' ), array( 'style' => 'height: 20%' ) );
+	    
+	    ?>
+
+	    <div class="elementosForm customForm">
+
+		<?php
+
+		    // FORM
+		    $this->placeholder('form')->captureStart();
+
+			echo $this->form->getDisplayGroup( 'elementos_form' );
+
+		    $this->placeholder('form')->captureEnd();
+
+		    echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder('form') );
+
+		?>
+		
+	    </div>
+
+	    <p class="hint">
+		<?php echo $this->translate()->_( 'Para efetivar os lançamento arraste-os do lado esquerdo para o direito, para retirar, do lado direito para o esquerdo.' ); ?>
+	    </p>
+		
+	    <?php
+	
+	echo  $this->contentPane()->captureEnd( 'topo-reconciliacao' );
+	
+	// CONTENT DAS GRIDS
+	$this->contentPane()->captureStart( 'corpo-reconciliacao', array( 'region' => 'center' ), array() );
+	
+	    $this->borderContainer()->captureStart( 'corpo-border', array( 'liveSplitters' => 'false', 'gutters' => 'false' ), array( 'style' => 'width: 100%; height: 100%' ) );
+	    
+		$this->contentPane()->captureStart( 'corpo-left', array( 'region' => 'left' ), array( 'style' => 'width: 48%') );
+		
+		?>
+		    <div id="lancamentos-pendentes" style="width: 100%; height: 100%"></div>
+		<?php
+		
+		echo  $this->contentPane()->captureEnd( 'corpo-left' );
+		
+		$this->contentPane()->captureStart( 'corpo-right', array( 'region' => 'right' ), array( 'style' => 'width: 48%') );
+		
+		?>
+		    <div id="lancamentos-efetivados" style="width: 100%; height: 100%"></div>
+		<?php
+		echo  $this->contentPane()->captureEnd( 'corpo-right' );
+	    
+	    echo $this->borderContainer()->captureEnd( 'corpo-border' );
+   
+	echo  $this->contentPane()->captureEnd( 'corpo-reconciliacao' );
+	
+	// CONTENT DA TOOLBAR
+	$this->contentPane()->captureStart( 'rodape-reconciliacao', array( 'region' => 'bottom' ), array( 'style' => 'height: 6%' ) );
+	
+	    echo $this->form->getDisplayGroup( 'toolbar' );
+   
+	echo  $this->contentPane()->captureEnd( 'rodape-reconciliacao' );
+       
+   echo $this->borderContainer()->captureEnd( 'borderReconciliacao' );

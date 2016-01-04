@@ -1,0 +1,18 @@
+<div class="mainTela">
+    <div dojoType="dijit.layout.BorderContainer" class="borderToolbar">
+        <?php 
+		echo $this->toolbar()
+			  ->addCustomButton(
+			    array(
+				'action' => App_Plugins_Acl::getIdentifier( '/financeiro/tipo-lancamento/', 'Organizar' ),
+				'id'     => 'button-organizar-tipo-lancamento',
+				'label'  => 'Organizar',
+				'icon'   => 'dijitIconFilter',
+				'click'  => 'financeiroTipoLancamento.organizar();'
+			    )
+			  );  
+	?>
+    </div>
+    <div id="gridFinanceiroTipoLancamento" class="gridTela"></div>
+    <div id="divpagFinanceiroTipoLancamentoGrid" class="pagingBlock"></div>
+</div>

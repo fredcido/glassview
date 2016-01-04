@@ -1,0 +1,36 @@
+<tr>
+    <th><?php echo $this->translate()->_( 'Cartão' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Numero' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Bandeira' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Referência' ); ?></th>
+    <th><?php echo $this->translate()->_( 'Vencimento' ); ?></th>
+</tr>
+<tr>
+    <td><?php echo $this->data->fn_cc_descricao; ?></td>
+    <td><?php echo $this->data->fn_cc_numero; ?></td>
+    <td><?php echo $this->data->fn_cc_bandeira; ?></td>
+    <td><?php echo $this->date( $this->data->fn_cc_fat_ref , 'MM/yyyy' ); ?></td>
+    <td><?php echo $this->date( $this->data->fn_cc_fat_vencimento ); ?></td>
+</tr>
+
+<tr>
+    <th rowspan="<?php echo count($this->itens) + 1; ?>">
+        <?php echo $this->translate()->_('Lançamentos'); ?>
+    </th>
+    <th colspan="2"><?php echo $this->translate()->_('Descrição'); ?></td>
+    <th><?php echo $this->translate()->_('Data'); ?></td>
+    <th><?php echo $this->translate()->_('Valor'); ?></td>
+</tr>
+<?php $total = (float)0; ?>
+<?php foreach ($this->itens as $item) : ?>
+    <tr>
+        <td colspan="2"><?php echo $item->fn_lanc_cartao_desc; ?></td>
+        <td><?php echo $this->date($item->fn_lanc_cartao_data); ?></td>
+        <td><?php echo $this->currency($item->fn_lanc_cartao_valor); ?></td>
+    </tr>
+<?php $total += (float) $item->fn_lanc_cartao_valor; ?>
+<?php endforeach; ?>
+<tr>
+    <th colspan="3"><?php echo $this->translate()->_('Total fatura'); ?></td>
+    <td colspan="2"><?php echo $this->currency($total); ?></td>
+</tr>

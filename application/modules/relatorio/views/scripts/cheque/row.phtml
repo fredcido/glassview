@@ -1,0 +1,10 @@
+<tr>
+    <td><?php echo $this->date( $this->data->fn_cheque_data ); ?></td>
+    <td><?php echo $this->date( $this->data->fn_cheque_para ); ?></td>
+    <td><?php echo $this->data->terceiro_nome; ?></td>
+    <td><?php echo $this->nomenclatura()->situacaoCheque( $this->data ); ?></td>
+    <td><?php echo $this->data->fn_banco_nome; ?></td>
+    <td><?php echo $this->data->fn_conta_descricao; ?></td>
+    <td><?php echo $this->data->fn_cheque_numero; ?></td>
+    <td><?php echo $this->currency( $this->data->fn_cheque_valor ); ?></td>
+</tr>

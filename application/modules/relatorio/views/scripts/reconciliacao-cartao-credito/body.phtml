@@ -1,0 +1,19 @@
+<table id="relatorio">
+	<thead>
+		<tr>
+		    <th rowspan="2"><?php echo $this->translate()->_('Cartão de Crédito'); ?></th>
+		    <th rowspan="2"><?php echo $this->translate()->_('Referência'); ?></th>
+		    <th rowspan="2"><?php echo $this->translate()->_('Vencimento'); ?></th>
+		    <th rowspan="2"><?php echo $this->translate()->_('Total'); ?></th>
+		    <th colspan="2"><?php echo $this->translate()->_('Efetivada'); ?></th>
+		</tr>
+		<tr>
+			<th><?php echo $this->translate()->_('Conta'); ?></th>
+			<th><?php echo $this->translate()->_('Data'); ?></th>
+		</tr>
+	</thead>
+	
+    <tbody>
+        <?php echo $this->partialLoop( 'reconciliacao-cartao-credito/row.phtml', $this->data ); ?>
+    </tbody>
+</table>

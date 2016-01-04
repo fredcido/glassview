@@ -1,0 +1,27 @@
+<table id="relatorio">
+    <tbody>
+	<tr>
+	    <th><?php echo $this->translate()->_( 'Descrição' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Tipo' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Filial' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Situação' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Patrimônio' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Valor' ); ?></th>
+	    <th><?php echo $this->translate()->_( 'Aquisição' ); ?></th>
+	</tr>
+	<?php echo $this->partialLoop( 'ativo/row.phtml', $this->data ); ?>
+    </tbody>
+    
+    <tfoot>
+    	<tr>
+	    <td colspan="6">
+		    <?php echo $this->translate()->_( 'Total' ); ?>
+	    </td>
+	    <td>
+		<strong>
+		    <?php echo count( $this->data ); ?>
+		</strong>
+	    </td>
+    	</tr>
+    </tfoot>
+</table>

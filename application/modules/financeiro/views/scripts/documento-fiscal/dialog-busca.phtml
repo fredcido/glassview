@@ -1,0 +1,63 @@
+<div id="dialogBuscaDocFiscal"
+     title="<?php echo $this->translate()->_('Documento Fiscal'); ?>"
+     style="display:none;"
+     dojoType="dijit.Dialog">
+    <table>
+        <tr>
+            <td align="right">
+                <?php echo $this->translate()->_('Remetente'); ?>
+            </td>
+            <td align="left">
+                <input dojoType="dijit.form.ValidationTextBox"
+                id="dl_terceiro_id_remetente" />
+            </td>
+            <td align="right">
+                <?php echo $this->translate()->_('Destinatário'); ?>
+            </td>
+            <td align="left">
+                <input dojoType="dijit.form.ValidationTextBox"
+                id="dl_terceiro_id_destinatario" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <?php echo $this->translate()->_('Número'); ?>
+            </td>
+            <td align="left">
+                <input dojoType="dijit.form.ValidationTextBox"
+                id="dl_fn_doc_fiscal_numero" />
+            </td>
+            <td align="right">
+                <?php echo $this->translate()->_('Data'); ?>
+            </td>
+            <td align="left">
+                <input dojoType="dijit.form.DateTextBox"
+                id="dl_fn_doc_fiscal_data" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">
+                <button dojoType="dijit.form.Button"
+                        onClick="financeiroDocumentoFiscal.gridFiltraDocFical();"
+                        iconClass="dijitCustomizedIcon icon-toolbar-applicationformmagnify">
+                    <?php echo $this->translate()->_('Buscar'); ?>
+                </button>
+                <!-- 
+                <button dojoType="dijit.form.Button"
+                        onClick="financeiroDocumentoFiscal.novo();"
+                        iconClass="dijitCustomizedIcon icon-toolbar-applicationformmagnify">
+                    <?php echo $this->translate()->_('Novo'); ?>
+                </button>
+                -->
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="4" height="220px" width="650px">
+
+                    <div id="gridBuscaFinanceiroDocumentoFiscal" class="gridTela"></div>
+                    <div id="divpagBuscaFinanceiroDocumentoFiscalGrid" class="pagingBlock"></div>
+
+            </td>
+        </tr>
+    </table>
+</div>

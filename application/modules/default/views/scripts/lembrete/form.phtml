@@ -1,0 +1,32 @@
+<div class="elementosForm customForm">
+
+    <?php 
+
+	$this->placeholder( 'form' )->captureStart(); 
+
+	    $this->tabContainer()->captureStart( 'tabs-lembrete', 
+						 array(), 
+						 array( 'style' => 'width: 400px; height: 300px') );
+
+		$this->contentPane()->captureStart( 'tab-dados', array( 'title' => 'Dados' ) );
+
+		    echo $this->form->getDisplayGroup( 'elementos-dados' );
+
+		echo $this->contentPane()->captureEnd( 'tab-dados' );
+
+		$this->contentPane()->captureStart( 'tab-destino', array( 'title' => 'Destinos' ) );
+
+		    echo $this->form->getDisplayGroup( 'elementos-destino' );
+
+		echo $this->contentPane()->captureEnd( 'tab-destino' );
+
+	    echo $this->tabContainer()->captureEnd( 'tabs-lembrete' );
+
+	    echo $this->form->getDisplayGroup( 'toolbar' );
+
+	$this->placeholder( 'form' )->captureEnd(); 
+
+	echo $this->form( $this->form->getId(), $this->form->getAttribs(), $this->placeholder( 'form' ) );  
+     ?>
+ 
+</div>
